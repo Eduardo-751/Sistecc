@@ -72,7 +72,7 @@ public class CadastroProduto extends JInternalFrame {
         btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+            	dispose();
             }
         });
         pnBarraFerramentas.add(btnCancelar);

@@ -17,7 +17,7 @@ public class DAL {
 	private final String User = "root";
 	private final String Pass = "Edu@751463";
 
-	public void getConnection() throws ClassNotFoundException, SQLException {
+	public void getConnection() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + Server + "/" + DataBase, User, Pass);
 			if (conn != null) {

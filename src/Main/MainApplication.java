@@ -1,22 +1,22 @@
 package Main;
 
-import javax.swing.JInternalFrame;
+import javax.swing.JFrame;
 
-import View.MenuFrame;
+import View.Login;
 
 
 public class MainApplication {
-
-	private static MenuFrame mainFrame = new MenuFrame();
 	
+	public static JFrame frame;
+    /**
+     * @param args the command line arguments
+     * @throws InterruptedException 
+     */
 	public static void main(String[] args) {
-        mainFrame.setVisible(true);
+    	JFrame loginScreen = new Login();
+        frame = loginScreen;
+    	frame.setLocationRelativeTo(null);
+    	frame.setVisible(true);
 	}
 
-    public static void AddControlFrame(JInternalFrame frame) {
-    	mainFrame.add(frame).setVisible(true);
-    }
-    public static void RemoveControlFrame(JInternalFrame frame) {
-    	mainFrame.remove(frame);
-    }
 }
