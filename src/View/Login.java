@@ -46,52 +46,46 @@ public class Login extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 1920, 1080);
+		setBounds(100, 100, 1280, 720);
+		setLocationRelativeTo(null);
 		setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setIcon(new ImageIcon(Login.class.getResource("/Img/Logo.png")));
-		lblLogo.setBounds(1230, 726, 650, 354);
-		contentPane.add(lblLogo);
+		containerLogin.setBounds(843, 342, 427, 368);
+		containerLogin.setVisible(false);
 
-		containerLoading.setBounds(1230, 351, 650, 428);
+		containerLoading.setBounds(843, 342, 427, 368);
 		contentPane.add(containerLoading);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(89, 151, 538, 33);
+		progressBar.setBounds(49, 151, 333, 33);
 		containerLoading.add(progressBar);
-
-		containerLogin.setBounds(1230, 351, 650, 428);
-		containerLogin.setVisible(false);
 		contentPane.add(containerLogin);
 
 		txtLogin = new JTextField();
-		txtLogin.setBounds(117, 100, 488, 44);
+		txtLogin.setBounds(29, 105, 388, 44);
 		txtLogin.setColumns(10);
 		containerLogin.add(txtLogin);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(117, 196, 488, 44);
+		passwordField.setBounds(29, 197, 388, 44);
 		containerLogin.add(passwordField);
 
 		JLabel lblLogin = new JLabel("Login:");
 		lblLogin.setForeground(Color.WHITE);
 		lblLogin.setBackground(Color.WHITE);
 		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblLogin.setBounds(117, 64, 116, 25);
+		lblLogin.setBounds(29, 73, 116, 25);
 		containerLogin.add(lblLogin);
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setBackground(Color.WHITE);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPassword.setBounds(117, 160, 116, 25);
+		lblPassword.setBounds(29, 160, 116, 25);
 		containerLogin.add(lblPassword);
 
 		JButton btnLogin = new JButton("Login");
@@ -106,12 +100,19 @@ public class Login extends JFrame {
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnLogin.setBounds(252, 287, 221, 44);
+		btnLogin.setBounds(111, 271, 221, 44);
 		containerLogin.add(btnLogin);
+
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setIcon(new ImageIcon(Login.class.getResource("/Img/Logo.png")));
+		lblLogo.setBounds(843, 11, 427, 352);
+		contentPane.add(lblLogo);
 
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(Login.class.getResource("/Img/LoginScreen.png")));
-		lblBackground.setBounds(0, 0, 1920, 1080);
+		lblBackground.setBounds(0, 0, 1280, 720);
 		contentPane.add(lblBackground);
 	}
 

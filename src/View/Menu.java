@@ -27,8 +27,8 @@ public class Menu extends JFrame {
 	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(0, 0, 1920, 1080);
+		setBounds(0, 0, 1280, 720);
+		setLocationRelativeTo(null);
 		setUndecorated(true);
 		setVisible(true);
 		contentPane = new JPanel();
@@ -38,7 +38,7 @@ public class Menu extends JFrame {
 
 		Panel panel = new Panel();
 		panel.setBackground(new Color(102, 0, 153));
-		panel.setBounds(0, 0, 1920, 130);
+		panel.setBounds(0, 0, 1280, 130);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -55,23 +55,23 @@ public class Menu extends JFrame {
 
 		Panel lblIcons = new Panel();
 		lblIcons.setBackground(new Color(240, 248, 255));
-		lblIcons.setBounds(0, 481, 1920, 601);
+		lblIcons.setBounds(0, 481, 1280, 401);
 		contentPane.add(lblIcons);
 		lblIcons.setLayout(null);
 
 		JLabel lblCaixa = new JLabel("");
 		lblCaixa.setIcon(new ImageIcon(Menu.class.getResource("/Img/Caixa.png")));
-		lblCaixa.setBounds(56, 70, 250, 146);
+		lblCaixa.setBounds(48, 51, 250, 146);
 		lblIcons.add(lblCaixa);
 
 		JLabel lblEstoque = new JLabel("");
 		lblEstoque.setIcon(new ImageIcon(Menu.class.getResource("/Img/Estoque.png")));
-		lblEstoque.setBounds(388, 70, 250, 146);
+		lblEstoque.setBounds(374, 51, 250, 146);
 		lblIcons.add(lblEstoque);
 
 		JLabel lblClientes = new JLabel("");
 		lblClientes.setIcon(new ImageIcon(Menu.class.getResource("/Img/Client.png")));
-		lblClientes.setBounds(701, 70, 250, 146);
+		lblClientes.setBounds(694, 51, 250, 146);
 		lblIcons.add(lblClientes);
 
 		JLabel lblWelcome = new JLabel("Bem vindo.");

@@ -5,40 +5,39 @@ package Model;
  */
 public class Produto {
 
-    private int codigo;
-    private String nome;
-    private Double precoCompra;
-    private Double precoVenda;
+    private int id;
+    private String descricao;
+    private Double qtdDisponivel, precoVenda, precoCompra;
     private int quantidade;
 
     //Métodos Construtores
-    public Produto() {
-        this.codigo = 0;
-        this.nome = "";
-        this.precoCompra = 0.0;
-        this.precoVenda = 0.0;
-        this.quantidade = 0;
+    public Produto(Double qtdDisponivel, String descricao, Double precoVenda, Double precoCompra) {
+        this.qtdDisponivel = qtdDisponivel;
+        this.descricao = descricao;
+        this.precoVenda = precoVenda;
+        this.precoCompra = precoCompra;
     }
+    
     public Produto(int codProduto) {
-        this.codigo = codProduto;
-        this.nome = "";
+        this.id = codProduto;
+        this.descricao = "";
         this.precoCompra = 0.0;
         this.precoVenda = 0.0;
         this.quantidade = 0;
     }
     
     //Gets and Sets
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int codigo) {
+        this.id = codigo;
     }
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String nome) {
+        this.descricao = nome;
     }
     public Double getPrecoCompra() {
         return precoCompra;
@@ -58,10 +57,17 @@ public class Produto {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+    public Double getQtdDisponivel() {
+		return qtdDisponivel;
+	}
 
-    //To string Override
+	public void setQtdDisponivel(Double qtdDisponivel) {
+		this.qtdDisponivel = qtdDisponivel;
+	}
+
+	//To string Override
     @Override
     public String toString() {
-        return getNome();
+        return getDescricao();
     }
 }
