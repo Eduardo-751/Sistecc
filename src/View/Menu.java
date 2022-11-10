@@ -16,11 +16,9 @@ import java.awt.event.MouseEvent;
 
 public class Menu extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JLabel lblEstoque;
 
 	/**
 	 * Create the frame.
@@ -35,7 +33,7 @@ public class Menu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		Panel panel = new Panel();
 		panel.setBackground(new Color(102, 0, 153));
 		panel.setBounds(0, 0, 1280, 130);
@@ -64,7 +62,13 @@ public class Menu extends JFrame {
 		lblCaixa.setBounds(48, 51, 250, 146);
 		lblIcons.add(lblCaixa);
 
-		JLabel lblEstoque = new JLabel("");
+		lblEstoque = new JLabel("");
+		lblEstoque.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainApplication.frame = new Estoque();
+			}
+		});
 		lblEstoque.setIcon(new ImageIcon(Menu.class.getResource("/Img/Estoque.png")));
 		lblEstoque.setBounds(374, 51, 250, 146);
 		lblIcons.add(lblEstoque);

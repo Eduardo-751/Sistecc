@@ -8,12 +8,12 @@ public class DAL {
 
 	private static Connection conn = null;
 
-	private final String Server = "localhost:3306";
-	private final String DataBase = "Sistecc";
-	private final String User = "root";
-	private final String Pass = "Edu@751463";
+	private final static String Server = "localhost:3306";
+	private final static String DataBase = "Sistecc";
+	private final static String User = "root";
+	private final static String Pass = "Edu@751463";
 
-	public void getConnection() {
+	public static void getConnection() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + Server + "/" + DataBase, User, Pass);
 			if (conn != null) {

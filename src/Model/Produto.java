@@ -6,24 +6,21 @@ package Model;
 public class Produto {
 
     private int id;
+    private String nome;
     private String descricao;
-    private Double qtdDisponivel, precoVenda, precoCompra;
-    private int quantidade;
+    private Double precoVenda;
 
     //Métodos Construtores
-    public Produto(Double qtdDisponivel, String descricao, Double precoVenda, Double precoCompra) {
-        this.qtdDisponivel = qtdDisponivel;
+    public Produto(String nome, String descricao, Double precoVenda) {
+    	this.nome = nome;
         this.descricao = descricao;
         this.precoVenda = precoVenda;
-        this.precoCompra = precoCompra;
     }
     
     public Produto(int codProduto) {
         this.id = codProduto;
         this.descricao = "";
-        this.precoCompra = 0.0;
         this.precoVenda = 0.0;
-        this.quantidade = 0;
     }
     
     //Gets and Sets
@@ -33,17 +30,17 @@ public class Produto {
     public void setId(int codigo) {
         this.id = codigo;
     }
-    public String getDescricao() {
+    public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDescricao() {
         return descricao;
     }
     public void setDescricao(String nome) {
         this.descricao = nome;
-    }
-    public Double getPrecoCompra() {
-        return precoCompra;
-    }
-    public void setPrecoCompra(Double precoCompra) {
-        this.precoCompra = precoCompra;
     }
     public Double getPrecoVenda() {
         return precoVenda;
@@ -51,19 +48,6 @@ public class Produto {
     public void setPrecoVenda(Double precoVenda) {
         this.precoVenda = precoVenda;
     }
-    public int getQuantidade() {
-        return quantidade;
-    }
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-    public Double getQtdDisponivel() {
-		return qtdDisponivel;
-	}
-
-	public void setQtdDisponivel(Double qtdDisponivel) {
-		this.qtdDisponivel = qtdDisponivel;
-	}
 
 	//To string Override
     @Override

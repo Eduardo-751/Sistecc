@@ -13,24 +13,22 @@ public class ProdutoDAO {
 	private Connection conexao = null;
 
 	public ProdutoDAO() {
+		if(DAL.getConn() == null)
+			DAL.getConnection();
+		
 		this.conexao = DAL.getConn();
 	}
 
 	public boolean cadastraProduto(Produto p) {
+		
+		String statementString = "INSERT INTO produtos (nome_prod, descricao_prod, preco_venda) VALUES (?, ?, ?)";
+		
 		try {
-			PreparedStatement sql = conexao.prepareStatement("insert into produto "
-					+ "(qtd_disponivel, descricao, preco_venda, preco_compra) values " + "(" + p.getQtdDisponivel()
-					+ "," + p.getDescricao() + "'," + p.getPrecoVenda() + "," + p.getPrecoCompra() + ")");
-			ResultSet rs = sql.executeQuery();
-			rs.next();
-			sql.execute();
-			sql = conexao.prepareStatement("select currval('produto_id_seq')");
-			rs = sql.executeQuery();
-			rs.next();
-			p.setId(rs.getInt("currval"));
-			sql.close();
-			rs.close();
-			sql = conexao.prepareStatement("select setval('produto_id_seq',(select coalesce(max(id),1) from produto))");
+			PreparedStatement sql = conexao.prepareStatement(statementString);
+			sql.setString(1, p.getNome());
+			sql.setString(2, p.getDescricao());
+			sql.setDouble(3, p.getPrecoVenda());
+			
 			sql.execute();
 			sql.close();
 			return true;
@@ -41,18 +39,24 @@ public class ProdutoDAO {
 
 	// Método para retornar um produto pelo ID
 	public Produto getProduto(int id) {
+		
+		String statementString = "SELECT * FROM produtos WHERE id_prod = ?";
 		Produto p = null;
+		
 		try {
-			PreparedStatement sql = conexao.prepareStatement("select * from produto where id = " + id);
+			PreparedStatement sql = conexao.prepareStatement(statementString);
+			sql.setInt(1, id);
+			
 			ResultSet rs = sql.executeQuery();
 			if (rs.next()) {
-				p = new Produto(rs.getDouble("qtdDisponivel"), rs.getString("descricao"), rs.getDouble("precoVenda"),
-						rs.getDouble("precoCompra"));
-				p.setId(rs.getInt("id"));
+				p = new Produto(rs.getString("nome_prod"), rs.getString("descricao_prod"), rs.getDouble("preco_venda"));
+				p.setId(rs.getInt("id_prod"));
 			}
+			
 			sql.close();
 			rs.close();
 			return p;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -60,12 +64,15 @@ public class ProdutoDAO {
 
 	// Método para retornar todos os produtos como um arraylist
 	public ArrayList<Produto> getLista() {
+		
+		String statementString = "SELECT * FROM produtos ORDER BY id_prod";
 		ArrayList<Produto> lista = new ArrayList<>();
+		
 		try {
-			PreparedStatement sql = conexao.prepareStatement("select id from produto order by id");
+			PreparedStatement sql = conexao.prepareStatement(statementString);
 			ResultSet rs = sql.executeQuery();
 			while (rs.next()) {
-				Produto p = this.getProduto(rs.getInt("id"));
+				Produto p = this.getProduto(rs.getInt("id_prod"));
 				lista.add(p);
 			}
 			sql.close();
@@ -78,54 +85,29 @@ public class ProdutoDAO {
 
 	// Método para alterar os dados de um produto já cadastrado
 	public boolean alteraProduto(Produto p) {
+		
+		String statementString = "UPDATE produtos SET nome_prod = ?, descricao_prod = ?, preco_venda = ? WHERE id_prod = ?";
+		
 		try {
-			PreparedStatement sql = conexao
-					.prepareStatement("select count(*)=0 as rs from (select cod_barras from produto where id <> "
-							+ p.getId() + ") as rt");
-			ResultSet rs = sql.executeQuery();
-			rs.next();
-			if (rs.getBoolean("rs"))
-				try {
-					sql = conexao.prepareStatement("update produto set descricao = '" + p.getDescricao()
-							+ "',preco_venda = " + p.getPrecoVenda() + ",preco_compra = " + p.getPrecoCompra()
-							+ "',qtd_disponivel = " + p.getQtdDisponivel() + "',notificar = ? where id = " + p.getId());
-					sql.execute();
-					sql.close();
-					rs.close();
-				} catch (SQLException er) {
-					throw new RuntimeException(er);
-				}
-			else
-				return false;
+			
+			PreparedStatement sql = conexao.prepareStatement(statementString);
+			sql.setString(1, p.getNome());
+			sql.setString(2, p.getDescricao());
+			sql.setDouble(3, p.getPrecoVenda());
+			sql.setInt(4, p.getId());
+			
+			sql.execute();
+			sql.close();
 			return true;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	// Método para excluir um produto
-	public boolean excluiProduto(Produto p) {
-		try {
-			PreparedStatement sql = conexao.prepareStatement(
-					"select count(*)=0 as rs from (select id_produto from vendaXproduto where id_produto = " + p.getId()
-							+ ") as rt");
-			ResultSet rs = sql.executeQuery();
-			rs.next();
-			if (rs.getBoolean("rs"))
-				try {
-					sql = conexao.prepareStatement("delete from produto where id = " + p.getId());
-					sql.execute();
-					sql.close();
-					rs.close();
-				} catch (SQLException er) {
-					throw new RuntimeException(er);
-				}
-			else
-				return false;
-			return true;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+	public void excluiProduto(Produto p) {
+
 	}
 
 }
