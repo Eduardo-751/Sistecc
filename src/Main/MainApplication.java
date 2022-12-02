@@ -2,11 +2,14 @@ package Main;
 
 import javax.swing.JFrame;
 
+import Controller.*;
 import View.Login;
 
 
 public class MainApplication {
 	
+	public static ControllerVenda vendasController;
+	public static ControllerUsuario operador;
 	public static JFrame frame;
     /**
      * @param args the command line arguments
@@ -20,3 +23,4 @@ public class MainApplication {
 	}
 
 }
+

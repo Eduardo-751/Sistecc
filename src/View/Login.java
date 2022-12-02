@@ -4,7 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.ControllerUsuario;
+import DB.UsuarioDAO;
 import Main.MainApplication;
+import Model.Usuario;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -34,6 +37,7 @@ public class Login extends JFrame {
 	private JPasswordField passwordField;
 	private JProgressBar progressBar;
 	private Container containerLogin = new Container(), containerLoading = new Container();
+	private UsuarioDAO userDAO = new UsuarioDAO();
 
 	/**
 	 * Create the frame.
@@ -92,11 +96,19 @@ public class Login extends JFrame {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (txtLogin.getText().equals("admin") && "admin".equals(new String(passwordField.getPassword()))) {
-					MainApplication.frame.dispose();
-					MainApplication.frame = new Menu();
-				} else
-					JOptionPane.showMessageDialog(null, "Login ou Senha invalida!");
+				
+				Usuario user = userDAO.getUsuarioByLogin(txtLogin.getText());
+				if(user != null) {
+					MainApplication.operador = new ControllerUsuario(user);
+					if (MainApplication.operador.getUsuarioSenha().equals(new String(passwordField.getPassword()))) {
+						MainApplication.frame.dispose();
+						MainApplication.frame = new Menu();
+					} else
+						JOptionPane.showMessageDialog(null, "Senha invalida!");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Usuario não cadastrado!");
+				}
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -121,7 +133,7 @@ public class Login extends JFrame {
 			try {
 				for (int i = 0; i <= 100; i++) {
 					progressBar.setValue(i);
-					Thread.sleep(50);
+					Thread.sleep(10);
 				}
 				containerLogin.setVisible(true);
 				containerLoading.setVisible(false);

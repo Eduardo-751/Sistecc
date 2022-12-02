@@ -74,6 +74,12 @@ public class Menu extends JFrame {
 		lblIcons.add(lblEstoque);
 
 		JLabel lblClientes = new JLabel("");
+		lblClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainApplication.frame = new Usuarios();
+			}
+		});
 		lblClientes.setIcon(new ImageIcon(Menu.class.getResource("/Img/Client.png")));
 		lblClientes.setBounds(694, 51, 250, 146);
 		lblIcons.add(lblClientes);
@@ -83,7 +89,7 @@ public class Menu extends JFrame {
 		lblWelcome.setBounds(24, 180, 81, 23);
 		contentPane.add(lblWelcome);
 
-		JLabel lblName = new JLabel("Administrador");
+		JLabel lblName = new JLabel(MainApplication.operador.getUsuarioNome());
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblName.setBounds(24, 214, 248, 110);
 		contentPane.add(lblName);
